@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #fce4ec 0%, #f06292 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 10;
+            max-width: 400px;
+            transform: scale(0);
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        h1 {
+            color: #d81b60;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: #d81b60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ad1457;
+            transform: translateY(-3px);
+        }
+
+        /* Animasi Balon */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            background: #ff4081;
+            border-radius: 50%;
+            opacity: 0.7;
+            z-index: 1;
+            animation: float 5s ease-in infinite;
+        }
+
+        @keyframes popIn {
+            to { transform: scale(1); }
+        }
+
+        @keyframes float {
+            to {
+                transform: translateY(-120vh) rotate(20deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>🎈 Happy Birthday! 🎂</h1>
+        <p>Selamat ulang tahun! Semoga harimu penuh kebahagiaan, tawa, dan semua impianmu tercapai. Kamu luar biasa!</p>
+        <button class="btn" onclick="tambahBalon()">Kirim Balon Lebih Banyak!</button>
+    </div>
+
+    <script>
+        function buatBalon() {
+            const colors = ['#ff4081', '#7c4dff', '#40c4ff', '#b2ff59', '#ffd740'];
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            
+            // Posisi acak
+            balloon.style.left = Math.random() * 100 + 'vw';
+            // Warna acak
+            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            // Durasi acak
+            balloon.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            
+            document.body.appendChild(balloon);
+
+            // Hapus balon setelah terbang keluar layar agar tidak berat
+            setTimeout(() => {
+                balloon.remove();
+            }, 6000);
+        }
+
+        // Jalankan balon otomatis saat dibuka
+        setInterval(buatBalon, 500);
+
+        function tambahBalon() {
+            for(let i=0; i<10; i++) {
+                setTimeout(buatBalon, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
